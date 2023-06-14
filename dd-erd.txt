@@ -1,0 +1,25 @@
+# paste into https://dbdiagram.io/
+
+Table regions {
+  country_name varchar(50)
+  country_code varchar(6)
+  region varchar(50)
+  income_group varchar(15)
+}
+
+Table land_area {
+  country_code varchar(6)
+  country_name varchar(50)
+  year integer
+  total_area_sq_mi float
+}
+
+Table forest_area {
+  country_code varchar(6)
+  country_name varchar(50)
+  year integer
+  forest_area_sqkm float
+}
+
+Ref: land_area.country_code < regions.country_code
+Ref: forest_area.country_code < regions.country_code
