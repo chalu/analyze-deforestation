@@ -144,42 +144,57 @@ LIMIT 5;
 
 
 -- 3.c.i If countries were grouped by percent forestation in quartiles, which group had the most countries in it in 2016?
--- At 52 countries, the 1st quartile has the most countries based on % forestation in 2016
+-- At 85 countries, the 1st quartile has the most countries based on % forestation in 2016
+-- The 2nd, 3rd and 4th quartiles have 73, 38, and 9 respectively
 WITH t1 AS (
   SELECT country,
          pct_forest,
-         NTILE(4) OVER (ORDER BY pct_forest) AS quartile
+         --NTILE(4) OVER (ORDER BY pct_forest) AS quartile
+         CASE WHEN pct_forest <= 0.25 THEN '1'
+              WHEN pct_forest > 0.25 AND pct_forest <= 0.5 THEN '2'
+              WHEN pct_forest > 0.5 AND pct_forest < 0.75 THEN '3'
+              ELSE '4' 
+         END AS quartile
   FROM (
     SELECT fa.country_name AS country,
-           (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS pct_forest
+           SUM(fa.forest_area_sqkm) / SUM(la.total_area_sq_mi * 2.59) AS pct_forest
+           -- (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS pct_forest
     FROM land_area la
     JOIN forest_area fa
          ON la.country_code = fa.country_code
          AND la.year = fa.year
     WHERE la.year = 2016
+    GROUP BY 1
   ) t2
   WHERE pct_forest > 0
+  GROUP BY 1, 2
 )
     
 SELECT quartile,
        COUNT(quartile) AS countries
 FROM t1
 GROUP BY 1
-ORDER BY 2 DESC
-LIMIT 1;
+ORDER BY 2 DESC;
+
 
 
 -- 3.c.ii List all of the countries that were in the 4th quartile (percent forest > 75%) in 2016.
--- There were 51 countries
+-- There were 9 countries
 WITH t1 AS (
   SELECT country,
          region,
          pct_forest,
-         NTILE(4) OVER (ORDER BY pct_forest) AS quartile
+         --NTILE(4) OVER (ORDER BY pct_forest) AS quartile
+         CASE WHEN pct_forest <= 0.25 THEN '1'
+              WHEN pct_forest > 0.25 AND pct_forest <= 0.5 THEN '2'
+              WHEN pct_forest > 0.5 AND pct_forest < 0.75 THEN '3'
+              ELSE '4' 
+         END AS quartile
   FROM (
     SELECT fa.country_name AS country,
            rg.region,
-           (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS pct_forest
+           SUM(fa.forest_area_sqkm) / SUM(la.total_area_sq_mi * 2.59) AS pct_forest
+           -- (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS pct_forest
     FROM land_area la
     JOIN forest_area fa
          ON la.country_code = fa.country_code
@@ -187,16 +202,19 @@ WITH t1 AS (
     JOIN regions rg
        ON fa.country_code = rg.country_code
     WHERE la.year = 2016
+    GROUP BY 1, 2
   ) t2
   WHERE pct_forest > 0
+  GROUP BY 1, 2, 3
 )
     
 SELECT country,
        region,
-       round(pct_forest::Decimal, 2) pct_forest
+       round((pct_forest * 100)::Decimal, 2) pct_forest
 FROM t1
-WHERE quartile >= 4
-ORDER BY 3 DESC;
+WHERE quartile::integer = 4
+ORDER BY 2 DESC;
+
 
 
 -- 3.d  How many countries had a percent forestation higher than the United States in 2016?
