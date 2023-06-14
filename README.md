@@ -10,6 +10,8 @@ Analysis of deforestation around the world to raise awareness about this crucial
 
 ## Key Findings & Recommendations
 
+> See [The Full Report](querysense-1990-2016-deforestation-report.pdf)
+
 ### Key Findings
 
 1.  Between 1990 and 2016, the world lost 3.21% of its forest area, which is more than the size of Peru as of 2016
