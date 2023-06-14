@@ -5,6 +5,9 @@ Analysis of deforestation around the world to raise awareness about this crucial
 
 > Analysis & report by Charles Odili
 
+### How the data looks like
+![ER disgram](query-sense-report-erd.png)
+
 ## Key Findings & Recommendations
 
 ### Key Findings
