@@ -18,7 +18,7 @@ Analysis of deforestation around the world to raise awareness about this crucial
 2.  Within this period, the exact same regions ranked at the top and bottom of forest area size. Latin America & Caribbean maintained the highest global forest area though it witnessed a drop of 5% (from 51% to 46%). Conversely, the Middle East & North Africa remained the region with the lowest global forest area, though it's forest area increased by 0.29% (from 1.78% to 2.07%) :yawning_face:
 3.  The only regions of the world that decreased in percent forest area from 1990 to 2016 were Latin America & Caribbean (dropped from 51.03 % to 46.16%) and Sub-Saharan Africa (30.67% to 28.79%). However, the drop in forest area in the two aforementioned regions was so large, the percent forest area of the world decreased over this period from 32.42% to 31.38%. :scream: :boom:
 4.  The top two countries that increased in forest area are China and the U.S. :clap: :thumbsup: :sunglasses: :raised_hands:
-5.  Brazil, Indonesia and Myanmar are the top 3 countries with the highest amount of lost forest area :sweat:
+5.  Brazil, Indonesia and Myanmar are the top 3 countries with the highest size of lost forest area :sweat:
 6.  Togo, Nigeria and Uganda are the top 3 countries with the highest % of lost forest area :sweat:
 
 
@@ -27,7 +27,7 @@ Analysis of deforestation around the world to raise awareness about this crucial
 1.  The two regions with potentially the most impact on global forestation are Sub-Saharan Africa and Latin America & Caribbean. Focus more efforts here. :muscle:
 2.  Countries in the high impact regions to focus more efforts include Brazil, Nigeria, Tanzania, Togo, Uganda, Mauritania and Honduras :pray:
 3.  Nigeria is the only country that ranks in the top 5 both in terms of absolute square kilometer decrease in forest as well as percent decrease in forest area from 1990 to 2016. Therefore, this country has a significant opportunity ahead to stop the decline and hopefully spearhead remedial efforts. :sob: :crossed_fingers: :pray: 
-4.  It would be great to study what drove the forest increase in China, the U.S, Iceland and French Polynesia, to see how it can be applied to the high risk and high impact countries listed in (2) :thinking: :writing_hand: :brain:
+4.  It would be great to study what drove the forest increase in China, the U.S, Iceland and French Polynesia, to see how it can be applied to the high risk and high impact countries listed in (2) :writing_hand: :brain:
 
 
 ### Appendix: SQL Queries Used
