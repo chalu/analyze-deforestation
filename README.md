@@ -69,4 +69,13 @@ They SQL files are:
 3.  [src/part-2-regional-outlook.sql](src/part-2-regional-outlook.sql)
 4.  [src/part-3-country-level-detail.sql](src/part-3-country-level-detail.sql)
 
+### Shocker
 
+One major thing I learnt was that the NTILE aggregate function (which can be used in windows functions to calculate percentiles) might not work literally / as expected
+
+> NTILE function doesn't look at the values, it just looks at the number of rows.
+> ---
+> For example, if there're 101 rows in a table and you use NTILE(4), it will first 
+check to see if 101 is divisible by 4. Since 101 divided by 4 is 25 remainder 1, 
+each of the groups will have 25 rows, and the remainder will be added to the first 
+group. group-1 26, grp-2 25, grp-3 25, grp-4 25
