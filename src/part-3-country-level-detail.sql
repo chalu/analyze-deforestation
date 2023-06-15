@@ -144,6 +144,13 @@ LIMIT 5;
 
 
 -- 3.c.i If countries were grouped by percent forestation in quartiles, which group had the most countries in it in 2016?
+/* =============================================================================
+NTILE function doesn't look at the values, it just looks at the number of rows. 
+For example, if there're 101 rows in a table and you use NTILE(4), it will first 
+check to see if 101 is divisible by 4. Since 101 divided by 4 is 25 remainder 1, 
+each of the groups will have 25 rows, and the remainder will be added to the first 
+group. group-1 26, grp-2 25, grp-3 25, grp-4 25
+================================================================================ */
 -- At 85 countries, the 1st quartile has the most countries based on % forestation in 2016
 -- The 2nd, 3rd and 4th quartiles have 73, 38, and 9 respectively
 WITH t1 AS (
@@ -177,9 +184,17 @@ GROUP BY 1
 ORDER BY 2 DESC;
 
 
-
 -- 3.c.ii List all of the countries that were in the 4th quartile (percent forest > 75%) in 2016.
 -- There were 9 countries
+-- Suriname
+-- Micronesia, Fed. Sts.
+-- Gabon
+-- Seychelles
+-- Palau
+-- American Samoa
+-- Guyana
+-- Lao PDR
+-- Solomon Islands
 WITH t1 AS (
   SELECT country,
          region,
@@ -213,11 +228,13 @@ SELECT country,
        round((pct_forest * 100)::Decimal, 2) pct_forest
 FROM t1
 WHERE quartile::integer = 4
-ORDER BY 2 DESC;
+ORDER BY 3 DESC;
 
 
 
 -- 3.d  How many countries had a percent forestation higher than the United States in 2016?
+-- U.S forestation in 2016 => 33.93%
+-- There were 94 countries
 WITH t1 AS (
   SELECT (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS us_pct_forest
   FROM land_area la
