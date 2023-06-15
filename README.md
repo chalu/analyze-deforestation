@@ -31,9 +31,38 @@ Analysis of deforestation around the world to raise awareness about this crucial
 
 
 ### Appendix: SQL Queries Used
-All the queries used for the analysis can be found in the [src folder](/src). 
+All the queries used for the analysis can be found in the [src folder](/src), but there's a snippet below to give an idea of how they look and are structured :
 
-They are:
+```sql
+-- Question: How many countries had a percent forestation higher than the United States in 2016?
+WITH t1 AS (
+  SELECT (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS us_pct_forest
+  FROM land_area la
+  JOIN forest_area fa
+       ON la.country_code = fa.country_code
+       AND la.year = fa.year
+  JOIN regions rg
+       ON fa.country_code = rg.country_code
+  WHERE la.year = 2016 AND fa.country_name = 'United States'
+)
+SELECT rg.country_name AS country,
+       (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 AS pct_forest
+FROM land_area la
+JOIN forest_area fa
+     ON la.country_code = fa.country_code
+     AND la.year = fa.year
+JOIN regions rg
+     ON fa.country_code = rg.country_code
+WHERE la.year = 2016
+GROUP BY rg.country_name, fa.forest_area_sqkm, la.total_area_sq_mi
+HAVING (fa.forest_area_sqkm / (la.total_area_sq_mi * 2.59)) * 100 > (SELECT * FROM t1)
+ORDER BY pct_forest DESC;
+
+-- U.S forestation in 2016 was 33.93%
+-- Answer: There were 94 countries with higher % forestation than the U.S in 2016
+```
+
+They SQL files are:
 
 1.  [src/part-0-prep.sql](src/part-0-prep.sql)
 2.  [src/part-1-global-situation.sql](src/part-1-global-situation.sql)
