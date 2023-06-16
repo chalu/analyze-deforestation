@@ -3,8 +3,6 @@
 
 Analysis of deforestation around the world to raise awareness about this crucial environmental topic
 
-> Analysis & report by Charles Odili
-
 ### How the data looks like
 ![ER disgram](query-sense-report-erd.png)
 
